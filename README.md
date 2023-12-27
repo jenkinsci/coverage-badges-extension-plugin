@@ -45,6 +45,43 @@ It will render a badge like this
 
 Please refer to the [embeddable-build-status](https://plugins.jenkins.io/embeddable-build-status/) for more information about the different URL to access the badges.
 
+## Example declarative Pipeline
+
+If the Jenkins controller has a tool configured for "maven-3.9.6" and "jdk-21" and has the appropriate plugins installed, the following declarative Pipeline provides a working example:
+
+```groovy
+pipeline {
+    agent {
+        label '!windows'
+    }
+    tools {
+        maven 'maven-3.9.6'
+        jdk 'jdk-21'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/jenkinsci/platformlabeler-plugin.git'
+            }
+        }
+        stage('Build & Test') {
+            steps {
+                sh 'mvn -P enable-jacoco clean verify'
+            }
+        }
+    }
+    post {
+        always {
+            recordCoverage tools: [[pattern: 'target/site/jacoco/jacoco.xml']]
+            echo "Coverage results embeddable build status build URL is:\n ${env.BUILD_URL}/badge/icon" +
+                 '?subject=Instruction+Coverage&status=${intructionCoverage}&color=${colorInstructionCoverage}'
+            echo "Coverage results embeddable build status job URL is:\n ${env.JOB_URL}/badge/icon" +
+                 '?subject=Instruction+Coverage&status=${intructionCoverage}&color=${colorInstructionCoverage}'
+        }
+    }
+}
+```
+
 ## Contributing
 
 [CONTRIBUTING](https://github.com/jenkinsci/.github/blob/master/CONTRIBUTING.md) file and make sure it is appropriate for your plugin, if not then add your own one adapted from the base file
