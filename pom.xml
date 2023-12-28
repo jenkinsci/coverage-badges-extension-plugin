@@ -11,7 +11,7 @@
   <artifactId>coverage-badges-extension</artifactId>
   <version>${changelist}</version>
   <packaging>hpi</packaging>
-  <name>TODO Plugin</name>
+  <name>Coverage Badges Extension Plugin</name>
   <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
   <licenses>
     <license>
