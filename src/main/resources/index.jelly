@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
-    <p>This plugin is an extension of the <a href="https://plugins.jenkins.io/embeddable-build-status/">embeddable-build-status</a>. It adds the ability to display coverage metrics badges for jobs and pipeline recording coverage using <a href="https://plugins.jenkins.io/coverage/">coverage plugin</a></p>
+    This plugin is an extension of the <a href="https://plugins.jenkins.io/embeddable-build-status/">embeddable-build-status</a>. It adds the ability to display coverage metrics badges for jobs and pipeline recording coverage using <a href="https://plugins.jenkins.io/coverage/">coverage plugin</a>
 </div>
