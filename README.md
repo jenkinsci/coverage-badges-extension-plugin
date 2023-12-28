@@ -1,5 +1,11 @@
 # Coverage Badges extension plugin
 
+![Build](https://ci.jenkins.io/job/Plugins/job/coverage-badges-extension-plugin/job/main/badge/icon)
+![Contributors](https://img.shields.io/github/contributors/jenkinsci/coverage-badges-extension-plugin.svg?color=blue)
+[![GitHub release](https://img.shields.io/github/release/jenkinsci/coverage-badges-extension-plugin.svg?label=changelog)](https://github.com/jenkinsci/coverage-badges-extension-plugin/releases/latest)
+[![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/coverage-badges-extension.svg?color=blue)](https://plugins.jenkins.io/coverage-badges-extension)
+[![GitHub license](https://img.shields.io/github/license/jenkinsci/coverage-badges-extension-plugin)](https://github.com/jenkinsci/coverage-badges-extension-plugin/blob/main/LICENSE.md)
+
 ## Introduction
 
 This plugin is an extension of the [embeddable-build-status](https://plugins.jenkins.io/embeddable-build-status/). It adds the ability to display coverage metrics badges for jobs and pipeline recording coverage using [coverage plugin](https://plugins.jenkins.io/coverage/) 
