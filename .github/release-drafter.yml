@@ -1,2 +1,0 @@
-_extends: .github
-tag-template: coverage-badges-extension-plugin-$NEXT_MINOR_VERSION
