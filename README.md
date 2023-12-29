@@ -79,10 +79,12 @@ pipeline {
     post {
         always {
             recordCoverage tools: [[pattern: 'target/site/jacoco/jacoco.xml']]
-            echo "Coverage results embeddable build status build URL is:\n ${env.BUILD_URL}/badge/icon" +
-                 '?subject=Instruction+Coverage&status=${instructionCoverage}&color=${colorInstructionCoverage}'
-            echo "Coverage results embeddable build status job URL is:\n ${env.JOB_URL}/badge/icon" +
-                 '?subject=Instruction+Coverage&status=${instructionCoverage}&color=${colorInstructionCoverage}'
+            echo 'Coverage results embeddable build status build URL is:\n' +
+                 env.BUILD_URL + '/badge/icon' +
+                 '?subject=Coverage&status=${branchCoverage}&color=${colorBranchCoverage}'
+            echo 'Coverage results embeddable build status job URL is:\n' +
+                 env.JOB_URL + '/badge/icon' +
+                 '?subject=Coverage&status=${branchCoverage}&color=${colorBranchCoverage}'
         }
     }
 }
