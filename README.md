@@ -18,7 +18,7 @@ It works only when the job or pipeline is reporting the coverage using `recordCo
 
 Following placeholder are
 
-- `intructionCoverage` : Display the instruction coverage percentage
+- `instructionCoverage` : Display the instruction coverage percentage
 - `branchCoverage` : Display the branch coverage percentage
 - `lineOfCode` : Display the total line of code
 - `numberOfTest` : Display the number of test
@@ -27,7 +27,7 @@ Following placeholder are
 
 For example a coverage badge can be displayed like this
 
-`<instanceUrl>/buildStatus/icon?job=job&subject=Coverage&status=${intructionCoverage}&color=${colorInstructionCoverage}`
+`<instanceUrl>/buildStatus/icon?job=job&subject=Coverage&status=${instructionCoverage}&color=${colorInstructionCoverage}`
 
 It will render a badge like this (example with 50% coverage)
 
@@ -80,9 +80,9 @@ pipeline {
         always {
             recordCoverage tools: [[pattern: 'target/site/jacoco/jacoco.xml']]
             echo "Coverage results embeddable build status build URL is:\n ${env.BUILD_URL}/badge/icon" +
-                 '?subject=Instruction+Coverage&status=${intructionCoverage}&color=${colorInstructionCoverage}'
+                 '?subject=Instruction+Coverage&status=${instructionCoverage}&color=${colorInstructionCoverage}'
             echo "Coverage results embeddable build status job URL is:\n ${env.JOB_URL}/badge/icon" +
-                 '?subject=Instruction+Coverage&status=${intructionCoverage}&color=${colorInstructionCoverage}'
+                 '?subject=Instruction+Coverage&status=${instructionCoverage}&color=${colorInstructionCoverage}'
         }
     }
 }
