@@ -17,7 +17,7 @@ import org.jvnet.hudson.test.junit.jupiter.WithJenkins;
 class CoverageParameterResolverExtensionTest {
 
     @Test
-    void shouldResolveIntructionCoverage(JenkinsRule jenkins) throws Exception {
+    void shouldResolveInstructionCoverage(JenkinsRule jenkins) throws Exception {
         String pipeline = IOUtils.toString(
                 CoverageParameterResolverExtensionTest.class.getResourceAsStream("/pipelines/coverage.groovy"),
                 StandardCharsets.UTF_8);
@@ -29,7 +29,7 @@ class CoverageParameterResolverExtensionTest {
 
         // Coverages badges
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "unknown"), is("unknown"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "intructionCoverage"), is("50.00%"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "instructionCoverage"), is("50.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("100.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("10"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("5"));
