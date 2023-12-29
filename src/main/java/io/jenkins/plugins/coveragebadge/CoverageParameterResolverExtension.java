@@ -65,7 +65,7 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
         return parameter;
     }
 
-    private String getColor(Value value) {
+    protected String getColor(Value value) {
         if (value instanceof Coverage) {
             Coverage coverage = (Coverage) value;
             int percentage = coverage.getCoveredPercentage().toInt();
