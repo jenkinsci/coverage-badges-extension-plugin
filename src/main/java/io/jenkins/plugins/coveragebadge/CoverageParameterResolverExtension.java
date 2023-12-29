@@ -33,7 +33,7 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
                 }
 
                 // Get the values
-                Value intructionCoverage = action.getStatistics()
+                Value instructionCoverage = action.getStatistics()
                         .getValue(Baseline.PROJECT, Metric.INSTRUCTION)
                         .orElse(null);
                 Value branchCoverage = action.getStatistics()
@@ -49,13 +49,13 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
                 // Replace the parameters
                 parameter = parameter
                         .replace(
-                                "intructionCoverage",
-                                intructionCoverage != null ? FORMATTER.format(intructionCoverage) : parameter)
+                                "instructionCoverage",
+                                instructionCoverage != null ? FORMATTER.format(instructionCoverage) : parameter)
                         .replace(
                                 "branchCoverage", branchCoverage != null ? FORMATTER.format(branchCoverage) : parameter)
                         .replace("numberOfTest", numberOfTest != null ? FORMATTER.format(numberOfTest) : parameter)
                         .replace("lineOfCode", lineOfCode != null ? FORMATTER.format(lineOfCode) : parameter)
-                        .replace("colorInstructionCoverage", getColor(intructionCoverage))
+                        .replace("colorInstructionCoverage", getColor(instructionCoverage))
                         .replace("colorBranchCoverage", getColor(branchCoverage));
 
             } else if (actionable instanceof Job<?, ?>) {
@@ -65,7 +65,7 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
         return parameter;
     }
 
-    private String getColor(Value value) {
+    protected String getColor(Value value) {
         if (value instanceof Coverage) {
             Coverage coverage = (Coverage) value;
             int percentage = coverage.getCoveredPercentage().toInt();
