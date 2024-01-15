@@ -36,6 +36,9 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
                 Value instructionCoverage = action.getStatistics()
                         .getValue(Baseline.PROJECT, Metric.INSTRUCTION)
                         .orElse(null);
+                Value lineCoverage = action.getStatistics()
+                        .getValue(Baseline.PROJECT, Metric.LINE)
+                        .orElse(null);
                 Value branchCoverage = action.getStatistics()
                         .getValue(Baseline.PROJECT, Metric.BRANCH)
                         .orElse(null);
@@ -53,10 +56,12 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
                                 instructionCoverage != null ? FORMATTER.format(instructionCoverage) : parameter)
                         .replace(
                                 "branchCoverage", branchCoverage != null ? FORMATTER.format(branchCoverage) : parameter)
+                        .replace("lineCoverage", lineCoverage != null ? FORMATTER.format(lineCoverage) : parameter)
                         .replace("numberOfTest", numberOfTest != null ? FORMATTER.format(numberOfTest) : parameter)
                         .replace("lineOfCode", lineOfCode != null ? FORMATTER.format(lineOfCode) : parameter)
                         .replace("colorInstructionCoverage", getColor(instructionCoverage))
-                        .replace("colorBranchCoverage", getColor(branchCoverage));
+                        .replace("colorBranchCoverage", getColor(branchCoverage))
+                        .replace("colorLineCoverage", getColor(lineCoverage));
 
             } else if (actionable instanceof Job<?, ?>) {
                 parameter = resolve(((Job<?, ?>) actionable).getLastBuild(), parameter);
