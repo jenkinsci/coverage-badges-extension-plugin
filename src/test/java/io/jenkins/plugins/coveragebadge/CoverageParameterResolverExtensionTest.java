@@ -263,4 +263,11 @@ class CoverageParameterResolverExtensionTest {
                 new CoverageParameterResolverExtension().getColor(Coverage.valueOf(Metric.INSTRUCTION, "90/100")),
                 is("brightgreen"));
     }
+
+    @Test
+    void shouldGetBuildColor() {
+        assertThat(new CoverageParameterResolverExtension().getBuildColor("computing"), is("blue"));
+        assertThat(new CoverageParameterResolverExtension().getBuildColor("aborted"), is("gray"));
+        assertThat(new CoverageParameterResolverExtension().getBuildColor("failure"), is("red"));
+    }
 }
