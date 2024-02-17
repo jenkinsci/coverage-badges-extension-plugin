@@ -73,7 +73,7 @@ class CoverageParameterResolverExtensionTest {
     }
 
     @Test
-    void shouldResolveInstructionCoverageForNonCoverageJob(JenkinsRule jenkins) throws Exception {
+    void shouldResolveInstructionCoverageForNonCoverageJobWithCompletion(JenkinsRule jenkins) throws Exception {
         String pipeline = IOUtils.toString(
                 CoverageParameterResolverExtensionTest.class.getResourceAsStream("/pipelines/no_coverage.groovy"),
                 StandardCharsets.UTF_8);
@@ -98,6 +98,27 @@ class CoverageParameterResolverExtensionTest {
         assertThat(
                 new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"),
                 is("colorBranchCoverage"));
+    }
+
+    @Test
+    void shouldResolveInstructionCoverageForNonCoverageJobWithoutCompletion(JenkinsRule jenkins) throws Exception {
+        String pipeline = IOUtils.toString(
+                CoverageParameterResolverExtensionTest.class.getResourceAsStream("/pipelines/no_coverage.groovy"),
+                StandardCharsets.UTF_8);
+        WorkflowJob workflowJob = jenkins.createProject(WorkflowJob.class);
+        workflowJob.setDefinition(new CpsFlowDefinition(pipeline, false));
+        WorkflowRun run1 = workflowJob.scheduleBuild2(0).waitForStart();
+        assertThat(run1.getResult(), equalTo(null));
+
+        // Coverages badges
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, null), nullValue());
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "unknown"), is("unknown"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "instructionCoverage"), is("COMPUTING"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("COMPUTING"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("COMPUTING"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("COMPUTING"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorInstructionCoverage"), is("blue"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"), is("blue"));
     }
 
     @Test
