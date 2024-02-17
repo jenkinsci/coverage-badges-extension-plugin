@@ -6,6 +6,7 @@ import edu.hm.hafner.coverage.Value;
 import hudson.Extension;
 import hudson.model.Actionable;
 import hudson.model.Job;
+import hudson.model.Result;
 import hudson.model.Run;
 import io.jenkins.plugins.coverage.metrics.model.Baseline;
 import io.jenkins.plugins.coverage.metrics.model.ElementFormatter;
@@ -25,10 +26,26 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
         if (parameter != null) {
             if (actionable instanceof Run<?, ?>) {
                 Run<?, ?> run = (Run<?, ?>) actionable;
+                Result buildResult = run.getResult();
+                String buildStatus =
+                        (buildResult != null) ? buildResult.toString().toLowerCase() : "computing";
 
                 // Get the action
                 CoverageBuildAction action = run.getAction(CoverageBuildAction.class);
+
                 if (action == null) {
+                    if (buildStatus.equals("success")) {
+                        return parameter;
+                    }
+                    parameter = parameter
+                            .replace("instructionCoverage", buildStatus)
+                            .replace("branchCoverage", buildStatus)
+                            .replace("lineCoverage", buildStatus)
+                            .replace("numberOfTest", buildStatus)
+                            .replace("lineOfCode", buildStatus)
+                            .replace("colorInstructionCoverage", getBuildColor(buildStatus))
+                            .replace("colorBranchCoverage", getBuildColor(buildStatus))
+                            .replace("colorLineCoverage", getBuildColor(buildStatus));
                     return parameter;
                 }
 
@@ -89,5 +106,15 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
             }
         }
         return "green";
+    }
+
+    protected String getBuildColor(String status) {
+        if (status.equals("aborted")) {
+            return "gray";
+        } else if (status.equals("failure")) {
+            return "red";
+        } else {
+            return "blue";
+        }
     }
 }
