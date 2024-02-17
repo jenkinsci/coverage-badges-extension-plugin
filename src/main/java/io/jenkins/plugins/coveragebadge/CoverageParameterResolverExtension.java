@@ -27,13 +27,14 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
             if (actionable instanceof Run<?, ?>) {
                 Run<?, ?> run = (Run<?, ?>) actionable;
                 Result buildResult = run.getResult();
-                String buildStatus = (buildResult != null) ? buildResult.toString() : "COMPUTING";
+                String buildStatus =
+                        (buildResult != null) ? buildResult.toString().toLowerCase() : "computing";
 
                 // Get the action
                 CoverageBuildAction action = run.getAction(CoverageBuildAction.class);
 
                 if (action == null) {
-                    if (buildStatus.equals("SUCCESS")) {
+                    if (buildStatus.equals("success")) {
                         return parameter;
                     }
                     parameter = parameter
@@ -108,10 +109,12 @@ public class CoverageParameterResolverExtension implements ParameterResolverExte
     }
 
     protected String getBuildColor(String status) {
-        if (status.equals("COMPUTING")) {
-            return "blue";
-        } else {
+        if (status.equals("aborted")) {
             return "gray";
+        } else if (status.equals("failure")) {
+            return "red";
+        } else {
+            return "blue";
         }
     }
 }

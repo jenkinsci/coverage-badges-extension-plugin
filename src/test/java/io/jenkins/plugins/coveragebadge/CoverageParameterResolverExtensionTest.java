@@ -98,6 +98,7 @@ class CoverageParameterResolverExtensionTest {
         assertThat(
                 new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"),
                 is("colorBranchCoverage"));
+        jenkins.waitForCompletion(run1);
     }
 
     @Test
@@ -113,12 +114,13 @@ class CoverageParameterResolverExtensionTest {
         // Coverages badges
         assertThat(new CoverageParameterResolverExtension().resolve(run1, null), nullValue());
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "unknown"), is("unknown"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "instructionCoverage"), is("COMPUTING"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("COMPUTING"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("COMPUTING"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("COMPUTING"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "instructionCoverage"), is("computing"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("computing"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("computing"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("computing"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorInstructionCoverage"), is("blue"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"), is("blue"));
+        jenkins.waitForCompletion(run1);
     }
 
     @Test
