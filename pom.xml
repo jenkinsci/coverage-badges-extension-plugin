@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>embeddable-build-status</artifactId>
-      <version>467.v4a_954796e45d</version>
+      <version>487.va_0ef04c898a_2</version>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
