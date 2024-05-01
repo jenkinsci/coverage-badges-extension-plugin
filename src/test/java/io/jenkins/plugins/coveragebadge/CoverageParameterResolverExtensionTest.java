@@ -46,7 +46,7 @@ class CoverageParameterResolverExtensionTest {
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "instructionCoverage"), is("50.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("100.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("10"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("5"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("4"));
         assertThat(
                 new CoverageParameterResolverExtension().resolve(run1, "colorInstructionCoverage"), is("yellowgreen"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"), is("brightgreen"));
@@ -164,7 +164,7 @@ class CoverageParameterResolverExtensionTest {
                 is("instructionCoverage"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "branchCoverage"), is("branchCoverage"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "lineOfCode"), is("lineOfCode"));
-        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("5"));
+        assertThat(new CoverageParameterResolverExtension().resolve(run1, "numberOfTest"), is("4"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorInstructionCoverage"), is("green"));
         assertThat(new CoverageParameterResolverExtension().resolve(run1, "colorBranchCoverage"), is("green"));
     }
@@ -224,7 +224,7 @@ class CoverageParameterResolverExtensionTest {
                 is("50.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(freeStyleProject, "branchCoverage"), is("100.00%"));
         assertThat(new CoverageParameterResolverExtension().resolve(freeStyleProject, "lineOfCode"), is("10"));
-        assertThat(new CoverageParameterResolverExtension().resolve(freeStyleProject, "numberOfTest"), is("5"));
+        assertThat(new CoverageParameterResolverExtension().resolve(freeStyleProject, "numberOfTest"), is("4"));
         assertThat(
                 new CoverageParameterResolverExtension().resolve(freeStyleProject, "colorInstructionCoverage"),
                 is("yellowgreen"));
