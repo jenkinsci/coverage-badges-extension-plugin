@@ -27,7 +27,7 @@
   </scm>
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
-    <jenkins.version>2.426.3</jenkins.version>
+    <jenkins.version>2.452.2</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <spotless.check.skip>false</spotless.check.skip>
   </properties>
@@ -36,7 +36,7 @@
     <dependencies>
       <dependency>
         <groupId>io.jenkins.tools.bom</groupId>
-        <artifactId>bom-2.426.x</artifactId>
+        <artifactId>bom-2.452.x</artifactId>
         <version>3143.v347db_7c6db_6e</version>
         <type>pom</type>
         <scope>import</scope>
